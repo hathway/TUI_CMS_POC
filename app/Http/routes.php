@@ -19,8 +19,7 @@ Route::get("admin/pages/edit/{id}","PagesController@edit");
 Route::post("admin/pages/edit/{id}","PagesController@edit");
 Route::get("admin/pages/delete/{id}","PagesController@destroy");
 
-Route::get("/{slug}","PagesController@render");
 Route::get("/pages.json","PagesController@json");
-Route::get("/", function() {
-    return redirect("/admin/pages");
-});
+Route::get("/", "PagesController@index");
+
+Route::get("/{slug}","PagesController@render");

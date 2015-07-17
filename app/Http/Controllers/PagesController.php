@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
 
@@ -55,7 +54,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        $form = DataForm::source(new Post());  
+        $form = DataForm::source(new Page());  
         $this->_buildForm($form);
 
         $title = "Add New Page";
@@ -126,11 +125,11 @@ class PagesController extends Controller
         abort(404);
     }
 
-    public function json($slug)
+    public function json()
     {
-        $pages = Page::orderBy('created_at','desc');
+        $pages = Page::all();
         if ($pages) {
-            return view('pages.json',compact('pages'));
+            return json_encode($pages);
         }
 
         abort(404);
@@ -150,6 +149,7 @@ class PagesController extends Controller
             $form->add('image_url','Hero Image', 'image')->move('hero_images')->fit(300, 300)->preview(80,80);        
         }
 
+        $form->add('is_html','Body Is HTML','checkbox');
         $form->add('body','Body','redactor')->rule('required');
         $form->saved(function () use ($form) {
             return Redirect::to('/admin/pages');
