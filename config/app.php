@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://local.tuicms.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,6 +143,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Zofe\Rapyd\RapydServiceProvider::class,
 
     ],
 
